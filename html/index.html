@@ -1,5 +1,111 @@
-<html>
-  <body>
-    <h1>Hello team! Make sure to configure git before working on the site! :3</h1>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Contact Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+    <style>
+        body {
+            background-image: url('https://cdn.discordapp.com/attachments/903014510376398889/1327149260130484284/Untitled96_20250110003710.png?ex=67820390&is=6780b210&hm=5695c2247fe4cba03f3b048deb66b78e401a5b6bcd137729de4eefb579084305&');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .form-container {
+            background: rgba(195, 229, 255, 0.9); 
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: 50px auto;
+            box-shadow: 0 4px 10px rgb(39,63,119);
+        }
+
+        h1 {
+            text-align: center;
+            color: rgb(39,63,119);
+        }
+
+        h2 {
+            color: rgb(233, 238, 242);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="login-page" class="page">
+        <div class="form-container">
+            <form id="login-form">
+                <h2>Login</h2>
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" required>
+
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" required>
+
+                <button type="submit">Login</button>
+                <p>Don't have an account? <a href="#" id="show-signup">Sign up</a></p>
+            </form>
+
+            <form id="signup-form" class="hidden">
+                <h2>Sign Up</h2>
+                <label for="signup-email">Email:</label>
+                <input type="email" id="signup-email" required>
+
+                <label for="signup-password">Password:</label>
+                <input type="password" id="signup-password" required>
+
+                <button type="submit">Sign Up</button>
+                <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+            </form>
+        </div>
+    </div>
+</body>
 </html>

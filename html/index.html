@@ -3,9 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Contact Manager</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
+    <title>Fish Animation</title>
+    <style>
+
+        .fish {
+            position: absolute;
+            left: -100px; /* Start off-screen */
+            width: 100px;
+            animation: swim linear forwards;
+        }
+
+        @keyframes swim {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(110vw); /* Swim across the screen */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+    <script>
+        const container = document.querySelector('.container');
+
+        function createFish() {
+            const fish = document.createElement('img');
+            fish.src = 'https://i.ibb.co/7rL6Nnq/fish.png'; // Replace with your fish image URL
+            fish.className = 'fish';
+
+            // Set random vertical position
+            const topPosition = Math.random() * window.innerHeight;
+            fish.style.top = `${topPosition}px`;
+
+             // Set random z-index (either 2 or 5)
+            const zIndex = Math.random() < 0.5 ? 2 : 5;
+            fish.style.zIndex = zIndex;
+
+            // Set random animation duration
+            const duration = Math.random() * 5 + 5; // Between 5s and 10s
+            fish.style.animationDuration = `${duration}s`;
+
+            // Append the fish to the container
+            container.appendChild(fish);
+
+            // Remove the fish once it exits the screen
+            fish.addEventListener('animationend', () => {
+                fish.remove();
+            });
+        }
+
+        // Generate fish at random intervals
+        setInterval(createFish, 1000); // A new fish every second
+    </script>
     <style>
         body {
             margin: 0;
@@ -20,38 +71,52 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://i.ibb.co/8crh4SS/backgroound.png');
+            background-image: url('https://i.ibb.co/0Zfw77j/background.png');
             background-size: cover;
             background-position: center;
             z-index: 1;
         }
 
-        .rock-layer {
+        .rock-layer-behind {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://i.ibb.co/QnzH11B/rock-1.png'); /* Replace with your transparent rock image URL */
+            background-image: url('https://i.ibb.co/ZNQP3zr/rock-back.png');
             background-size: cover;
             background-position: center;
-            z-index: 2;
+            z-index: 4;
+        }
+
+        .light {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.ibb.co/n0CDD0Z/light.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 3;
+        }
+
+        .rock-layer-front {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.ibb.co/Chsm5Gw/roxk-front.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 6; /* Between background and main rock layer */
         }
 
         .fish {
             position: absolute;
             width: 100px;
-            animation: swim 10s linear infinite;
-            z-index: 3;
-        }
-
-        @keyframes swim {
-            0% {
-                transform: translateX(-500px) translateY(500px);
-            }
-            100% {
-                transform: translateX(100vw) translateY(200px);
-            }
+            z-index: 5;
         }
 
         .form-container {
@@ -62,7 +127,7 @@
             max-width: 400px;
             margin: 50px auto;
             box-shadow: 0 4px 10px rgb(39,63,119);
-            z-index: 4;
+            z-index: 7;
         }
 
         h1 {
@@ -71,7 +136,7 @@
         }
 
         h2 {
-            color: rgb(39, 63, 119);
+            color: rgb(39,63,119)
         }
 
         label {
@@ -90,7 +155,7 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: #007BFF;
+            background-color:rgb(39, 63, 119);
             color: white;
             border: none;
             border-radius: 4px;
@@ -103,7 +168,7 @@
         }
 
         a {
-            color: #007BFF;
+            color: rgb(0, 89, 223);
             text-decoration: none;
         }
 
@@ -118,9 +183,9 @@
 </head>
 <body>
     <div class="background"></div>
-    <div class="rock-layer"></div>
-
-    <img src="https://static.vecteezy.com/system/resources/previews/024/722/367/non_2x/fish-with-ai-generated-free-png.png" alt="Fish" class="fish"> <!-- Replace with your fish image URL -->
+    <div class="rock-layer-behind"></div>
+    <div class="light"></div>
+    <div class="rock-layer-front"></div>
 
     <div id="login-page" class="page">
         <div class="form-container">

@@ -8,7 +8,7 @@
 
         .fish {
             position: absolute;
-            left: -100px; /* Start off-screen */
+            left: -100px;
             width: 100px;
             animation: swim linear forwards;
         }
@@ -18,7 +18,7 @@
                 transform: translateX(0);
             }
             to {
-                transform: translateX(110vw); /* Swim across the screen */
+                transform: translateX(110vw); 
             }
         }
     </style>
@@ -30,39 +30,34 @@
 
         function createFish() {
             const fish = document.createElement('img');
-            fish.src = 'https://i.ibb.co/7rL6Nnq/fish.png'; // Replace with your fish image URL
+            fish.src = 'https://i.ibb.co/7rL6Nnq/fish.png';
             fish.className = 'fish';
 
-            // Set random vertical position
             const topPosition = Math.random() * window.innerHeight;
             fish.style.top = `${topPosition}px`;
 
-             // Set random z-index (either 2 or 5)
             const zIndex = Math.random() < 0.5 ? 2 : 5;
             fish.style.zIndex = zIndex;
 
-            // Set random animation duration
-            const duration = Math.random() * 5 + 5; // Between 5s and 10s
+            const duration = Math.random() * 5 + 5; 
             fish.style.animationDuration = `${duration}s`;
 
-            // Append the fish to the container
             container.appendChild(fish);
 
-            // Remove the fish once it exits the screen
             fish.addEventListener('animationend', () => {
                 fish.remove();
             });
         }
 
-        // Generate fish at random intervals
-        setInterval(createFish, 1000); // A new fish every second
+        setInterval(createFish, 1000);
     </script>
     <style>
+
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            overflow: hidden; /* Prevent scrolling */
+            overflow: hidden;
         }
 
         .background {
@@ -110,7 +105,7 @@
             background-image: url('https://i.ibb.co/Chsm5Gw/roxk-front.png');
             background-size: cover;
             background-position: center;
-            z-index: 6; /* Between background and main rock layer */
+            z-index: 6;
         }
 
         .fish {
@@ -192,7 +187,7 @@
             <form id="login-form">
                 <h2>Login</h2>
                 <label for="login-username">Username:</label>
-                <input type="username" id="login-username" required>
+                <input type="text" id="login-username" required>
 
                 <label for="login-password">Password:</label>
                 <input type="password" id="login-password" required>
@@ -202,5 +197,41 @@
             </form>
         </div>
     </div>
+
+    <div id="signup-page" class="page hidden">
+        <div class="form-container">
+            <form id="signup-form">
+                <h2>Sign Up</h2>
+                <label for="signup-username">Username:</label>
+                <input type="text" id="signup-username" required>
+
+                <label for="signup-password">Password:</label>
+                <input type="password" id="signup-password" required>
+
+                <button type="submit">Sign Up</button>
+                <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Toggle between login and signup pages
+        const loginPage = document.getElementById('login-page');
+        const signupPage = document.getElementById('signup-page');
+        const showSignup = document.getElementById('show-signup');
+        const showLogin = document.getElementById('show-login');
+
+        showSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginPage.classList.add('hidden');
+            signupPage.classList.remove('hidden');
+        });
+
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupPage.classList.add('hidden');
+            loginPage.classList.remove('hidden');
+        });
+    </script>
 </body>
 </html>

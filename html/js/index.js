@@ -1,5 +1,5 @@
 const urlBase = 'http://cop4331-team26.xyz/LAMPAPI/';
-const extension = 'php';
+const extension = '.php';
 
 const loginPage = document.getElementById('login-page');
 const signupPage = document.getElementById('signup-page');
@@ -73,7 +73,7 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
         password: document.getElementById('login-password').value,
     };
 
-    makeRequest('Login.', data, (response) => {
+    makeRequest('Login', data, (response) => {
         if (response.error)
         {
         }
@@ -100,20 +100,18 @@ document.getElementById('signup-form').addEventListener('submit', (e) => {
         lastName: document.getElementById('signup-lastname').value,
     };
 
-    makeRequest('Signup.', data, (response) => {
+    makeRequest('Signup', data, (response) => {
         if (response.error)
         {
             alert(response.error);
         }
         else
         {
-            // If successful, store user data or simply alert
             const { id, firstName, lastName } = response;
             localStorage.setItem('userId', id);
             localStorage.setItem('firstName', firstName);
             localStorage.setItem('lastName', lastName);
-
-            // Optionally redirect or let them log in automatically
+            
             alert("Signup successful! You are now logged in.");
             window.location.href = 'main.html';
         }

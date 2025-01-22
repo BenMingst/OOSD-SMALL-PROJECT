@@ -73,7 +73,7 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
         password: document.getElementById('login-password').value,
     };
 
-    makeRequest('/Login.', data, (response) => {
+    makeRequest('Login.', data, (response) => {
         if (response.error)
         {
         }
@@ -100,7 +100,7 @@ document.getElementById('signup-form').addEventListener('submit', (e) => {
         lastName: document.getElementById('signup-lastname').value,
     };
 
-    makeRequest('/Signup.', data, (response) => {
+    makeRequest('Signup.', data, (response) => {
         if (response.error)
         {
             alert(response.error);

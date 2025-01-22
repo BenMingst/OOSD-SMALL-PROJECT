@@ -10,7 +10,7 @@ document.getElementById('add-contact-button').addEventListener('click', () => {
         userId: localStorage.getItem('userId'),
     };
 
-    makeRequest('/AddContact.', data, (response) => {
+    makeRequest('AddContact.', data, (response) => {
         alert(response.error ? response.error : 'Contact added successfully.');
     });
 });
@@ -21,7 +21,7 @@ document.getElementById('delete-contact-button').addEventListener('click', () =>
         userId: localStorage.getItem('userId'),
     };
 
-    makeRequest('/DeleteContact.', data, (response) => {
+    makeRequest('DeleteContact.', data, (response) => {
         alert(response.error ? response.error : 'Contact deleted successfully.');
     });
 });
@@ -32,7 +32,7 @@ document.getElementById('search-contact-button').addEventListener('click', () =>
         userId: localStorage.getItem('userId'),
     };
 
-    makeRequest('/SearchContacts.', data, (response) => {
+    makeRequest('SearchContacts.', data, (response) => {
         const resultsContainer = document.getElementById('search-results');
         resultsContainer.innerHTML = ''; 
 
@@ -60,7 +60,7 @@ document.getElementById('update-contact-button').addEventListener('click', () =>
         userId: localStorage.getItem('userId'),
     };
 
-    makeRequest('/UpdateContact.', data, (response) => {
+    makeRequest('UpdateContact.', data, (response) => {
         alert(response.error ? response.error : 'Contact updated successfully.');
     });
 });

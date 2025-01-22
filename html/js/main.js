@@ -1,4 +1,4 @@
-const urlBase = 'http://cop4331-team26.xyz/';
+const urlBase = 'http://cop4331-team26.xyz/LAMPAPI/';
 const extension = 'php';
 
 document.getElementById('add-contact-button').addEventListener('click', () => {

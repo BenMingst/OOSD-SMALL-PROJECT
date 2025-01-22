@@ -48,11 +48,13 @@ function createFish() {
     });
 }
 
+/* endpoint is our api endpoint (ex http://cop4331-team26.xyz/LAMPIAPI/Login.php), payload is 
+   the json file we send and callback sends the response we get back up to caller */
 function makeRequest(endpoint, payload, callback) {
-    const url = urlBase + endpoint + extension;
-    const xhr = new XMLHttpRequest();
+    const url = urlBase + endpoint + extension; 
+    const xhr = new XMLHttpRequest(); 
 
-    xhr.open('POST', url, true);
+    xhr.open('POST', url, true); 
     xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200)
@@ -62,12 +64,16 @@ function makeRequest(endpoint, payload, callback) {
         }
     };
 
-    xhr.send(JSON.stringify(payload));
+    const jsonPayload = JSON.stringify(payload);
+
+    xhr.send(jsonPayload);
 }
 
+// login api
 document.getElementById('login-form').addEventListener('submit', (e) => {
     e.preventDefault();
 
+    // 
     const data = {
         login: document.getElementById('login-username').value,
         password: document.getElementById('login-password').value,
@@ -90,6 +96,7 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
     });
 });
 
+// signup api
 document.getElementById('signup-form').addEventListener('submit', (e) => {
     e.preventDefault();
 

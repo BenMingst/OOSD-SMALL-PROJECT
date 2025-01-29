@@ -1,10 +1,9 @@
-this is the edit-contact.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Contact</title>
+    <title>Update Contact</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+NSW:wght@100..400&display=swap" rel="stylesheet">
@@ -105,11 +104,11 @@ this is the edit-contact.html
             width: 100%;
             border-radius: 5px;
             font-size: 1rem;
-            margin-top: 15px; /* Position it below the form submit button */
+            margin-top: 15px;
         }
 
         .back-button:hover {
-            background: #273f77;
+            background: #1b2c5c;
         }
     </style>
 </head>
@@ -118,17 +117,18 @@ this is the edit-contact.html
     <div class="rock-layer-behind"></div>
     <div class="light"></div>
     <div class="rock-layer-front"></div>
-    
+
     <div class="form-container">
         <header class="form-header">
-            <h1 class="form-title">Add Contact</h1>
+            <h1 class="form-title">Update Contact</h1>
         </header>
         <form>
-            <input type="text" placeholder="First Name" required>
-            <input type="text" placeholder="Last Name" required>
-            <input type="tel" placeholder="Phone Number" required>
-            <input type="email" placeholder="Email" required>
-            <button type="submit">Save Contact</button>
+            <!-- Pre-fill existing values for updating -->
+            <input type="text" placeholder="First Name" value="John" required>
+            <input type="text" placeholder="Last Name" value="Doe" required>
+            <input type="tel" placeholder="Phone Number" value="123-456-7890" required>
+            <input type="email" placeholder="Email" value="john.doe@example.com" required>
+            <button type="submit">Update Contact</button>
         </form>
         <!-- Back Button -->
         <a href="contact.html">
@@ -137,3 +137,4 @@ this is the edit-contact.html
     </div>
 </body>
 </html>
+

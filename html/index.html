@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fish Animation</title>
+    <title>WaveLink</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+NSW:wght@100..400&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container"></div>
@@ -37,7 +40,7 @@
             background-image: url('https://i.ibb.co/ZNQP3zr/rock-back.png');
             background-size: cover;
             background-position: center;
-            z-index: 4;
+            z-index: 2;
         }
 
         .light {
@@ -49,7 +52,7 @@
             background-image: url('https://i.ibb.co/n0CDD0Z/light.png');
             background-size: cover;
             background-position: center;
-            z-index: 3;
+            z-index: 2;
         }
 
         .rock-layer-front {
@@ -61,33 +64,33 @@
             background-image: url('https://i.ibb.co/Chsm5Gw/roxk-front.png');
             background-size: cover;
             background-position: center;
-            z-index: 6;
-        }
-
-        .fish {
-            position: absolute;
-            width: 100px;
-            z-index: 5;
+            z-index: 2;
         }
 
         .form-container {
             position: relative;
             background: rgba(195, 229, 255, 0.9);
+            border-radius: 16px;
+            max-width: 500px;
             padding: 20px;
-            border-radius: 8px;
-            max-width: 400px;
+            padding-top: 0;
             margin: 50px auto;
-            box-shadow: 0 4px 10px rgb(39,63,119);
-            z-index: 7;
+            z-index: 3;
+        }
+
+        .form-header {
+            background-color: rgb(39,63,119);
+            color: white;
+            border-radius: 16px 16px 0 0;
+            font-family: 'Playwrite AU NSW', sans-serif;
+            font-size: 1rem;
+            padding: 0.5px 10px;
+            margin: -20px -20px 10px -20px;
         }
 
         h1 {
-            text-align: center;
-            color: rgb(39,63,119);
-        }
-
-        h2 {
-            color: rgb(39,63,119)
+            text-align: left;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         label {
@@ -102,20 +105,10 @@
             animation: swim linear forwards;
         }
 
-        @keyframes swim {
-            from {
-                transform: translateX(0);
-            }
-
-            to {
-                transform: translateX(110vw);
-            }
-        }
-
         input {
             width: 95%;
             padding: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
@@ -157,8 +150,10 @@
 
         <div id="login-page" class="page">
             <div class="form-container">
+                <header class="form-header">
+                    <h1 class="form-title">Login</h1>
+                </header>
                 <form id="login-form">
-                    <h2>Login</h2>
                     <label for="login-username">Username:</label>
                     <input type="text" id="login-username" required>
 
@@ -173,8 +168,10 @@
 
         <div id="signup-page" class="page hidden">
             <div class="form-container">
+                <header class="form-header">
+                    <h1 class="form-title">Sign Up</h1>
+                </header>
                 <form id="signup-form">
-                    <h2>Sign Up</h2>
                     <label for="signup-firstname">FirstName:</label>
                     <input type="text" id="signup-firstname" required>
 

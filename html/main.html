@@ -1,50 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Main Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaveLink Contact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+NSW:wght@100..400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Playwrite AU NSW', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .background, .rock-layer-behind, .light, .rock-layer-front {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .background {
+            background-image: url('https://i.ibb.co/0Zfw77j/background.png');
+            z-index: 1;
+        }
+
+        .rock-layer-behind {
+            background-image: url('https://i.ibb.co/ZNQP3zr/rock-back.png');
+            z-index: 4;
+        }
+
+        .light {
+            background-image: url('https://i.ibb.co/n0CDD0Z/light.png');
+            z-index: 3;
+        }
+
+        .rock-layer-front {
+            background-image: url('https://i.ibb.co/Chsm5Gw/roxk-front.png');
+            z-index: 6;
+        }
+
+        .form-container {
+            position: relative;
+            background: rgba(195, 229, 255, 0.9);
+            border-radius: 16px;
+            width: 50%;
+            margin: 50px auto;
+            z-index: 7;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-header {
+            background-color: rgb(39, 63, 119);
+            color: white;
+            border-radius: 16px 16px 0 0;
+            padding: 10px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .search-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .search-btn, .contact-btn {
+            padding: 10px 15px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .search-btn {
+            background-color: #273f77;
+        }
+
+        .contact-btn {
+            background-color: #4caf50;
+        }
+
+        .results-table {
+            width: 100%;
+            margin-top: 20px;
+            background-color: white;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .results-table th, .results-table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .results-table th {
+            background-color: #273f77;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-left: 5px;
+            height: 50px;
+            width: 65px;
+        }
+
+        .edit-btn {
+            background-color: #273f77;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #ff4d4d;
+            color: white;
+        }
+
+        .contact-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-info {
+            flex-grow: 1;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Main Page</h1>
+    <div class="background"></div>
+    <div class="rock-layer-behind"></div>
+    <div class="light"></div>
+    <div class="rock-layer-front"></div>
 
-    <div>
-        <h2>Add Contact</h2>
-        <input type="text" id="add-first-name" placeholder="First Name" />
-        <input type="text" id="add-last-name" placeholder="Last Name" />
-        <input type="text" id="add-phone" placeholder="Phone" />
-        <input type="text" id="add-email" placeholder="Email" />
-        <button id="add-contact-button">Add Contact</button>
+    <div class="form-container">
+        <header class="form-header">
+            <h1 class="form-title">WaveLink</h1>
+        </header>
+        <form id="search-form">
+            <div class="search-container">
+                <input type="text" id="search-query" class="search-input" placeholder="Search" required>
+                <button type="submit" class="search-btn">🔍</button>
+                <a href="add-contact.html" class="contact-btn">+</a>
+            </div>
+        </form>
+
+        <table class="results-table hidden">
+            <tbody id="results-body"></tbody>
+        </table>
     </div>
 
-    <br />
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const query = document.getElementById('search-query').value.trim();
+            if (query) {
+                displayResults([ 
+                    { name: 'John Doe', phone: '123-456-7890', email: 'john.doe@example.com' },
+                    { name: 'Jane Smith', phone: '987-654-3210', email: 'jane.smith@example.com' },
+                    { name: 'Alex Johnson', phone: '555-123-4567', email: 'alex.johnson@example.com' }
+                ]);
+                document.getElementById('search-query').value = '';
+            }
+        });
 
-    <div>
-        <h2>Delete Contact</h2>
-        <input type="text" id="delete-phone" placeholder="Phone" />
-        <button id="delete-contact-button">Delete Contact</button>
-    </div>
+        function displayResults(results) {
+            const resultsBody = document.getElementById('results-body');
+            resultsBody.innerHTML = '';
+            results.forEach(result => {
+                const row = document.createElement('tr');
+                const contactRow = document.createElement('td');
+                contactRow.classList.add('contact-row');
 
-    <br />
+                // Contact information
+                const contactInfo = document.createElement('div');
+                contactInfo.classList.add('contact-info');
+                contactInfo.innerHTML = `${result.name}<br>${result.phone}<br>${result.email}`;
+                contactRow.appendChild(contactInfo);
 
-    <div>
-        <h2>Search Contacts</h2>
-        <input type="text" id="search-query" placeholder="Search by First or Last Name" />
-        <button id="search-contact-button">Search</button>
-        <div id="search-results"></div>
-    </div>
+                // Action buttons (Edit and Delete)
+                const actionButtons = document.createElement('div');
+                actionButtons.classList.add('action-buttons');
+                actionButtons.innerHTML = `
+                    <a href="update-contact.html"><button class="action-btn edit-btn">Edit</button></a>
+                    <button class="action-btn delete-btn" onclick="deleteContact(event)">Delete</button>
+                `;
+                contactRow.appendChild(actionButtons);
 
-    <br />
+                row.appendChild(contactRow);
+                resultsBody.appendChild(row);
+            });
+            document.querySelector('.results-table').classList.remove('hidden');
+        }
 
-    <div>
-        <h2>Update Contact</h2>
-        <p>Enter the phone number of the contact you would like to update</p>
-        <input type="text" id="update-phone" placeholder="Phone Number of Contact" />
-        <input type="text" id="update-first-name" placeholder="New First Name" />
-        <input type="text" id="update-last-name" placeholder="New Last Name" />
-        <input type="text" id="update-email" placeholder="New Email" />
-        <button id="update-contact-button">Update Contact</button>
-    </div>
-
-    <script src="js/main.js"></script>
+        function deleteContact(event) {
+            const row = event.target.closest('tr');
+            row.remove();
+        }
+    </script>
 </body>
 </html>

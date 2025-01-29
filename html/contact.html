@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+NSW:wght@100..400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Playwrite AU NSW', sans-serif; /* Apply to the entire body */
+        }
+
+        .fish {
+            position: absolute;
+            left: -100px;
+            width: 100px;
+            animation: swim linear forwards;
+        }
+
+        @keyframes swim {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(110vw); 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.ibb.co/0Zfw77j/background.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .rock-layer-behind {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.ibb.co/ZNQP3zr/rock-back.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 4;
+        }
+
+        .light {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.ibb.co/n0CDD0Z/light.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 3;
+        }
+
+        .rock-layer-front {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.ibb.co/Chsm5Gw/roxk-front.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 6;
+        }
+
+        .fish {
+            position: absolute;
+            width: 100px;
+            z-index: 5;
+        }
+
+        .form-container {
+            position: relative;
+            background: rgba(195, 229, 255, 0.9);
+            border-radius: 16px;
+            width: calc(120vh);
+            margin: 20px auto;
+            z-index: 7;
+            height: calc(100vh - 80px); /* Full height minus 50px */
+
+        }
+
+        .form-header {
+            background-color: rgb(39,63,119);
+            color: white;
+            border-radius: 16px 16px 0 0;
+            padding: 10px;
+            font-family: 'Playwrite AU NSW', sans-serif;
+            font-size: 1.5rem;
+        }
+
+        h1 {
+            text-align: left;
+            margin: 0;
+        }
+
+        .search-input {
+            width: 96.8%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .results-table {
+            width: 100%;
+            margin: 20px 0;
+            background-color: white;
+            border-collapse: collapse;
+            text-align: left;
+            z-index: 7;
+        }
+
+        .results-table th, .results-table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .results-table th {
+            background-color: #273f77;
+            color: white;
+        }
+
+        .results-table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .edit-btn, .delete-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        
+    </style>
+    </head>
+    <body>
+        <div class="background"></div>
+        <div class="rock-layer-behind"></div>
+        <div class="light"></div>
+        <div class="rock-layer-front"></div>
+
+    <div id="search-page" class="page">
+        <div class="form-container">
+            <header class="form-header">
+                <h1 class="form-title">WaveLink</h1>
+            </header>
+            <form id="search-form">
+                <input 
+                    type="text" 
+                    id="search-query" 
+                    class="search-input" 
+                    placeholder="Search" 
+                    required>
+            </form>
+            <table class="results-table hidden">
+                <tbody id="results-body"></tbody>
+            </table>
+        </div>
+    </body>
+
+    <script>
+        const searchForm = document.getElementById('search-form');
+        const searchQuery = document.getElementById('search-query');
+        const resultsTable = document.querySelector('.results-table');
+        const resultsBody = document.getElementById('results-body');
+
+        // Mock data for results
+        const mockResults = [
+            { name: 'Result 1' },
+            { name: 'Result 2' },
+            { name: 'Result 3' }
+        ];
+
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault(); 
+            const query = searchQuery.value.trim();
+
+            if (query) {
+                displayResults(mockResults); // Replace with actual search logic
+                searchQuery.value = '';
+            }
+        });
+
+        function displayResults(results) {
+            resultsBody.innerHTML = ''; 
+            results.forEach((result, index) => {
+                const row = document.createElement('tr');
+
+                // Name column
+                const nameCell = document.createElement('td');
+                nameCell.textContent = result.name;
+                row.appendChild(nameCell);
+
+                // Actions column
+                const actionsCell = document.createElement('td');
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton.className = 'edit-btn';
+                editButton.addEventListener('click', () => editResult(index));
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.className = 'delete-btn';
+                deleteButton.addEventListener('click', () => deleteResult(index));
+
+                actionsCell.appendChild(editButton);
+                actionsCell.appendChild(deleteButton);
+                row.appendChild(actionsCell);
+
+                resultsBody.appendChild(row);
+            });
+
+            resultsTable.classList.remove('hidden');
+        }
+
+    </script>
+
+</body>
+</html>

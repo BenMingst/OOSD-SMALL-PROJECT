@@ -2,17 +2,20 @@ const urlBase = 'http://cop4331-team26.xyz/LAMPAPI/';
 const extension = '.php';
 
 
+const deleteActive = false;
 
-document.getElementById('delete-contact-button').addEventListener('click', () => {
-    const data = {
-        phone: document.getElementById('delete-phone').value,
-        userId: localStorage.getItem('userId'),
-    };
+if (deleteActive) {
+    document.getElementById('delete-contact-button').addEventListener('click', () => {
+        const data = {
+            phone: document.getElementById('delete-phone').value,
+            userId: localStorage.getItem('userId'),
+        };
 
-    makeRequest('DeleteContact', data, (response) => {
-        alert(response.error ? response.error : 'Contact deleted successfully.');
+        makeRequest('DeleteContact', data, (response) => {
+            alert(response.error ? response.error : 'Contact deleted successfully.');
+        });
     });
-});
+}
 
 document.getElementById('search-contact-button').addEventListener('click', () => {
     const data = {
@@ -81,6 +84,7 @@ function displayResults(results) {
         deleteIcon.alt = "Delete";
         deleteIcon.classList.add('icon-btn-small');
         deleteButton.appendChild(deleteIcon);
+        deleteActive = true; 
 
         actionButtons.appendChild(editButton);
         actionButtons.appendChild(deleteButton);

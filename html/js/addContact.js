@@ -1,3 +1,6 @@
+const urlBase = 'http://cop4331-team26.xyz/LAMPAPI/';
+const extension = '.php';
+
 function validatePhoneNumber(phone) {
     const phoneRegex = /^\d{3}-\d{3}-\d{4}$/; // Example format: 123-456-7890
     return phoneRegex.test(phone);

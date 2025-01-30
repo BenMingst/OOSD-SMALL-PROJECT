@@ -241,19 +241,6 @@
     </div>
 
     <script>
-        document.getElementById('search-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const query = document.getElementById('search-query').value.trim();
-            if (query) {
-                displayResults([ 
-                    { name: 'John Doe', phone: '123-456-7890', email: 'john.doe@example.com' },
-                    { name: 'Jane Smith', phone: '987-654-3210', email: 'jane.smith@example.com' },
-                    { name: 'Alex Johnson', phone: '555-123-4567', email: 'alex.johnson@example.com' }
-                ]);
-                document.getElementById('search-query').value = '';
-            }
-        });
-
         function displayResults(results) {
             const resultsBody = document.getElementById('results-body');
             resultsBody.innerHTML = '';

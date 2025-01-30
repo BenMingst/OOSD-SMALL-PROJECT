@@ -74,6 +74,9 @@ function displayResults(results) {
         editIcon.alt = "Edit";
         editIcon.classList.add('icon-btn-small');
         editButton.appendChild(editIcon);
+        editIcon.addEventListener('click', () => {
+            localStorage.setItem("tempPhone", result.Phone);
+        });
 
         const deleteButton = document.createElement('button');
         deleteButton.classList.add('delete-btn');

@@ -1,14 +1,17 @@
 const urlBase = 'http://cop4331-team26.xyz/LAMPAPI/';
 const extension = '.php';
 
+const 
+
 document.getElementById('update-contact-button').addEventListener('click', () => {
     const data = {
         firstName: document.getElementById('update-first-name').value,
         lastName: document.getElementById('update-last-name').value,
-        phone: document.getElementById('update-phone').value,
         email: document.getElementById('update-email').value,
         userId: localStorage.getItem('userId'),
+        phone: localStorage.getItem('tempPhone')
     };
+
 
     makeRequest('UpdateContact', data, (response) => {
         alert(response.error ? response.error : 'Contact updated successfully.');

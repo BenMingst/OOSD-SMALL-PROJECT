@@ -39,11 +39,7 @@ document.getElementById('search-contact-button').addEventListener('click', () =>
         }
         else
         {
-            response.results.forEach((contact) => {
-                const div = document.createElement('div');
-                div.textContent = `${contact.FirstName} ${contact.LastName} - ${contact.Phone} - ${contact.Email}`;
-                resultsContainer.appendChild(div);
-            });
+            displayResults(response.results);
         }
     });
 });

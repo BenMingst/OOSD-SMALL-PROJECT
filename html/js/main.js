@@ -7,7 +7,7 @@ deleteActive = false;
 if (deleteActive) {
     document.getElementById('delete-contact-button').addEventListener('click', () => {
         const data = {
-            phone: document.getElementById('delete-phone').value,
+            phone: phoneDelete,
             userId: localStorage.getItem('userId'),
         };
 
@@ -88,6 +88,9 @@ function displayResults(results) {
         deleteIcon.classList.add('icon-btn-small');
         deleteButton.appendChild(deleteIcon);
         deleteActive = true; 
+        deleteButton.addEventListener('click', () => {
+            var phoneDelete = result.Phone;
+        });
 
         actionButtons.appendChild(editButton);
         actionButtons.appendChild(deleteButton);

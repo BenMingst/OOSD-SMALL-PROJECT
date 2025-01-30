@@ -35,6 +35,31 @@ document.getElementById('add-email').addEventListener('input', function () {
     }
 });
 
+setInterval(createFish, 1000);
+
+
+
+function createFish() {
+    const fish = document.createElement('img');
+    fish.src = 'https://i.ibb.co/7rL6Nnq/fish.png';
+    fish.className = 'fish';
+
+    const topPosition = Math.random() * window.innerHeight;
+    fish.style.top = `${topPosition}px`;
+
+    const zIndex = Math.random() < 0.5 ? 2 : 5;
+    fish.style.zIndex = zIndex;
+
+    const duration = Math.random() * 5 + 5;
+    fish.style.animationDuration = `${duration}s`;
+
+    container.appendChild(fish);
+
+    fish.addEventListener('animationend', () => {
+        fish.remove();
+    });
+}
+
 document.getElementById('add-contact-button').addEventListener('click', () => {
     const data = {
         firstName: document.getElementById('add-first-name').value,

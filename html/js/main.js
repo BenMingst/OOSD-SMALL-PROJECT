@@ -104,8 +104,4 @@ function displayResults(results) {
     document.querySelector('.results-table').classList.remove('hidden');
 }
 
-function deleteContact(event) {
-    const row = event.target.closest('tr');
-    row.remove();
-}
 

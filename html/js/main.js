@@ -82,7 +82,6 @@ function displayResults(results) {
         const deleteButton = document.createElement('button');
         deleteButton.classList.add('delete-btn');
         deleteButton.id = "delete-contact-button";
-        deleteButton.onclick = deleteContact;
         const deleteIcon = document.createElement('img');
         deleteIcon.src = "https://i.ibb.co/nqnjzJqz/delete.png";
         deleteIcon.alt = "Delete";

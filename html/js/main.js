@@ -2,7 +2,7 @@ const urlBase = 'http://cop4331-team26.xyz/LAMPAPI/';
 const extension = '.php';
 
 
-const deleteActive = false;
+deleteActive = false;
 
 if (deleteActive) {
     document.getElementById('delete-contact-button').addEventListener('click', () => {

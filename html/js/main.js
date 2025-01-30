@@ -1,16 +1,6 @@
 const urlBase = 'http://cop4331-team26.xyz/LAMPAPI/';
 const extension = '.php';
 
-
-deleteActive = false;
-var phoneDelete;
-
-if (deleteActive) {
-    document.getElementById('delete-contact-button').addEventListener('click', () => {
-
-    });
-}
-
 document.getElementById('search-contact-button').addEventListener('click', () => {
     const data = {
         search: document.getElementById('search-query').value,

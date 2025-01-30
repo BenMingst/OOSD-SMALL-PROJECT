@@ -7,14 +7,7 @@ var phoneDelete;
 
 if (deleteActive) {
     document.getElementById('delete-contact-button').addEventListener('click', () => {
-        const data = {
-            phone: phoneDelete,
-            userId: localStorage.getItem('userId'),
-        };
 
-        makeRequest('DeleteContact', data, (response) => {
-            alert(response.error ? response.error : 'Contact deleted successfully.');
-        });
     });
 }
 
@@ -90,6 +83,15 @@ function displayResults(results) {
         deleteActive = true; 
         deleteButton.addEventListener('click', () => {
             phoneDelete = result.Phone;
+
+            const data = {
+                phone: phoneDelete,
+                userId: localStorage.getItem('userId'),
+            };
+
+            makeRequest('DeleteContact', data, (response) => {
+                alert(response.error ? response.error : 'Contact deleted successfully.');
+            });
         });
 
         actionButtons.appendChild(editButton);

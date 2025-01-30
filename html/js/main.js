@@ -1,19 +1,7 @@
 const urlBase = 'http://cop4331-team26.xyz/LAMPAPI/';
 const extension = '.php';
 
-document.getElementById('add-contact-button').addEventListener('click', () => {
-    const data = {
-        firstName: document.getElementById('add-first-name').value,
-        lastName: document.getElementById('add-last-name').value,
-        phone: document.getElementById('add-phone').value,
-        email: document.getElementById('add-email').value,
-        userId: localStorage.getItem('userId'),
-    };
 
-    makeRequest('AddContact', data, (response) => {
-        alert(response.error ? response.error : 'Contact added successfully.');
-    });
-});
 
 document.getElementById('delete-contact-button').addEventListener('click', () => {
     const data = {
@@ -41,20 +29,6 @@ document.getElementById('search-contact-button').addEventListener('click', () =>
         {
             displayResults(response.results);
         }
-    });
-});
-
-document.getElementById('update-contact-button').addEventListener('click', () => {
-    const data = {
-        firstName: document.getElementById('update-first-name').value,
-        lastName: document.getElementById('update-last-name').value,
-        phone: document.getElementById('update-phone').value,
-        email: document.getElementById('update-email').value,
-        userId: localStorage.getItem('userId'),
-    };
-
-    makeRequest('UpdateContact', data, (response) => {
-        alert(response.error ? response.error : 'Contact updated successfully.');
     });
 });
 
@@ -123,36 +97,3 @@ function deleteContact(event) {
     row.remove();
 }
 
-function validatePhoneNumber(phone) {
-    const phoneRegex = /^\d{3}-\d{3}-\d{4}$/; // Example format: 123-456-7890
-    return phoneRegex.test(phone);
-}
-
-function validateEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email format
-    return emailRegex.test(email);
-}
-
-document.getElementById('add-phone').addEventListener('input', function () {
-    const phoneInput = this.value;
-    const phoneError = document.getElementById('phone-error');
-
-    if (!validatePhoneNumber(phoneInput)) {
-        phoneError.textContent = 'Invalid phone number format. Use 123-456-7890.';
-        phoneError.style.display = 'block';
-    } else {
-        phoneError.style.display = 'none';
-    }
-});
-
-document.getElementById('add-email').addEventListener('input', function () {
-    const emailInput = this.value;
-    const emailError = document.getElementById('email-error');
-
-    if (!validateEmail(emailInput)) {
-        emailError.textContent = 'Invalid email format.';
-        emailError.style.display = 'block';
-    } else {
-        emailError.style.display = 'none';
-    }
-});

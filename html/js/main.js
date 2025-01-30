@@ -1,6 +1,9 @@
 const urlBase = 'http://cop4331-team26.xyz/LAMPAPI/';
 const extension = '.php';
 
+
+setInterval(createFish, 1000);
+
 document.getElementById('search-contact-button').addEventListener('click', () => {
     const data = {
         search: document.getElementById('search-query').value,
@@ -19,7 +22,6 @@ document.getElementById('search-contact-button').addEventListener('click', () =>
     });
 });
 
-setInterval(createFish, 1000);
 
 
 function makeRequest(endpoint, payload, callback) {

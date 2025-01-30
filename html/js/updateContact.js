@@ -1,6 +1,9 @@
 const urlBase = 'http://cop4331-team26.xyz/LAMPAPI/';
 const extension = '.php';
 
+
+setInterval(createFish, 1000);
+
 document.getElementById('update-contact-button').addEventListener('click', () => {
     const data = {
         firstName: document.getElementById('update-first-name').value,
@@ -37,9 +40,6 @@ function createFish() {
         fish.remove();
     });
 }
-
-setInterval(createFish, 1000);
-
 
 function makeRequest(endpoint, payload, callback) {
     const url = urlBase + endpoint + extension;

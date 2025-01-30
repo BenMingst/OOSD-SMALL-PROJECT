@@ -36,17 +36,12 @@ document.getElementById('search-contact-button').addEventListener('click', () =>
         const resultsContainer = document.getElementById('search-results');
         resultsContainer.innerHTML = ''; 
 
-        if (response.error)
-        {
+        if (response.error) {
             alert(response.error);
         }
         else
         {
-            response.results.forEach((contact) => {
-                const div = document.createElement('div');
-                div.textContent = `${contact.FirstName} ${contact.LastName} - ${contact.Phone} - ${contact.Email}`;
-                resultsContainer.appendChild(div);
-            });
+            displayResults(response.results);
         }
     });
 });
@@ -80,4 +75,52 @@ function makeRequest(endpoint, payload, callback) {
     };
 
     xhr.send(JSON.stringify(payload));
+}
+
+function displayResults(results) {
+    const resultsBody = document.getElementById('results-body');
+    resultsBody.innerHTML = '';
+    results.forEach(result => {
+        const row = document.createElement('tr');
+        const contactRow = document.createElement('td');
+        contactRow.classList.add('contact-row');
+        const contactInfo = document.createElement('div');
+        contactInfo.classList.add('contact-info');
+        contactInfo.innerHTML = `${result.name}<br>${result.phone}<br>${result.email}`;
+        contactRow.appendChild(contactInfo);
+
+        const actionButtons = document.createElement('div');
+        actionButtons.classList.add('action-buttons');
+
+        const editButton = document.createElement('a');
+        editButton.href = "update-contact.html";
+        const editIcon = document.createElement('img');
+        editIcon.src = "https://i.ibb.co/0y53H7VG/edit.png";
+        editIcon.alt = "Edit";
+        editIcon.classList.add('icon-btn-small');
+        editButton.appendChild(editIcon);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-btn');
+        deleteButton.onclick = deleteContact;
+        const deleteIcon = document.createElement('img');
+        deleteIcon.src = "https://i.ibb.co/nqnjzJqz/delete.png";
+        deleteIcon.alt = "Delete";
+        deleteIcon.classList.add('icon-btn-small');
+        deleteButton.appendChild(deleteIcon);
+
+        actionButtons.appendChild(editButton);
+        actionButtons.appendChild(deleteButton);
+        contactRow.appendChild(actionButtons);
+
+        row.appendChild(contactRow);
+        resultsBody.appendChild(row);
+    });
+
+    document.querySelector('.results-table').classList.remove('hidden');
+}
+
+function deleteContact(event) {
+    const row = event.target.closest('tr');
+    row.remove();
 }

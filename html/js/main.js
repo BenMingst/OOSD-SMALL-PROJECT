@@ -33,13 +33,20 @@ document.getElementById('search-contact-button').addEventListener('click', () =>
     };
 
     makeRequest('SearchContacts', data, (response) => {
+        const resultsContainer = document.getElementById('search-results');
+        resultsContainer.innerHTML = ''; 
 
-        if (response.error) {
+        if (response.error)
+        {
             alert(response.error);
         }
         else
         {
-            displayResults(response.results);
+            response.results.forEach((contact) => {
+                const div = document.createElement('div');
+                div.textContent = `${contact.FirstName} ${contact.LastName} - ${contact.Phone} - ${contact.Email}`;
+                resultsContainer.appendChild(div);
+            });
         }
     });
 });
@@ -84,7 +91,7 @@ function displayResults(results) {
         contactRow.classList.add('contact-row');
         const contactInfo = document.createElement('div');
         contactInfo.classList.add('contact-info');
-        contactInfo.innerHTML = `${result.name}<br>${result.phone}<br>${result.email}`;
+        contactInfo.innerHTML = `${result.FirstName}<br>${result.Phone}<br>${result.Email}`;
         contactRow.appendChild(contactInfo);
 
         const actionButtons = document.createElement('div');

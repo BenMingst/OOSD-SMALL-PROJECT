@@ -126,3 +126,37 @@ function deleteContact(event) {
     const row = event.target.closest('tr');
     row.remove();
 }
+
+function validatePhoneNumber(phone) {
+    const phoneRegex = /^\d{3}-\d{3}-\d{4}$/; // Example format: 123-456-7890
+    return phoneRegex.test(phone);
+}
+
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email format
+    return emailRegex.test(email);
+}
+
+document.getElementById('add-phone').addEventListener('input', function () {
+    const phoneInput = this.value;
+    const phoneError = document.getElementById('phone-error');
+
+    if (!validatePhoneNumber(phoneInput)) {
+        phoneError.textContent = 'Invalid phone number format. Use 123-456-7890.';
+        phoneError.style.display = 'block';
+    } else {
+        phoneError.style.display = 'none';
+    }
+});
+
+document.getElementById('add-email').addEventListener('input', function () {
+    const emailInput = this.value;
+    const emailError = document.getElementById('email-error');
+
+    if (!validateEmail(emailInput)) {
+        emailError.textContent = 'Invalid email format.';
+        emailError.style.display = 'block';
+    } else {
+        emailError.style.display = 'none';
+    }
+});

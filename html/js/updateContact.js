@@ -6,6 +6,7 @@ document.getElementById('update-contact-button').addEventListener('click', () =>
         firstName: document.getElementById('update-first-name').value,
         lastName: document.getElementById('update-last-name').value,
         email: document.getElementById('update-email').value,
+        phoneNew : document.getElementById('update-phone').value,
         userId: localStorage.getItem('userId'),
         phone: localStorage.getItem('tempPhone')
     };

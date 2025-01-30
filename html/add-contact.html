@@ -111,7 +111,7 @@
     <div class="rock-layer-behind"></div>
     <div class="light"></div>
     <div class="rock-layer-front"></div>
-    
+
     <div class="form-container">
         <header class="form-header">
             <h1 class="form-title">Add Contact</h1>
@@ -144,7 +144,7 @@
         document.getElementById('add-phone').addEventListener('input', function() {
             const phoneInput = this.value;
             const phoneError = document.getElementById('phone-error');
-            
+
             if (!validatePhoneNumber(phoneInput)) {
                 phoneError.textContent = 'Invalid phone number format. Use 123-456-7890.';
                 phoneError.style.display = 'block';
@@ -156,7 +156,7 @@
         document.getElementById('add-email').addEventListener('input', function() {
             const emailInput = this.value;
             const emailError = document.getElementById('email-error');
-            
+
             if (!validateEmail(emailInput)) {
                 emailError.textContent = 'Invalid email format.';
                 emailError.style.display = 'block';
@@ -167,3 +167,4 @@
     </script>
 </body>
 </html>
+

@@ -33,8 +33,6 @@ document.getElementById('search-contact-button').addEventListener('click', () =>
     };
 
     makeRequest('SearchContacts', data, (response) => {
-        const resultsContainer = document.getElementById('search-results');
-        resultsContainer.innerHTML = ''; 
 
         if (response.error) {
             alert(response.error);

@@ -3,6 +3,7 @@ const extension = '.php';
 
 
 deleteActive = false;
+var phoneDelete;
 
 if (deleteActive) {
     document.getElementById('delete-contact-button').addEventListener('click', () => {
@@ -89,7 +90,7 @@ function displayResults(results) {
         deleteButton.appendChild(deleteIcon);
         deleteActive = true; 
         deleteButton.addEventListener('click', () => {
-            var phoneDelete = result.Phone;
+            phoneDelete = result.Phone;
         });
 
         actionButtons.appendChild(editButton);

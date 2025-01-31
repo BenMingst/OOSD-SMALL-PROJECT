@@ -1,8 +1,6 @@
 const urlBase = 'http://cop4331-team26.xyz/LAMPAPI/';
 const extension = '.php';
 
-setInterval(createFish, 1000);
-
 function validatePhoneNumber(phone) {
     const phoneRegex = /^\d{3}-\d{3}-\d{4}$/; // Example format: 123-456-7890
     return phoneRegex.test(phone);
@@ -36,6 +34,10 @@ document.getElementById('add-email').addEventListener('input', function () {
         emailError.style.display = 'none';
     }
 });
+
+setInterval(createFish, 1000);
+
+
 
 function createFish() {
     const fish = document.createElement('img');

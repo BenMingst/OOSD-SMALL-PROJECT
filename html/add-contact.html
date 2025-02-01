@@ -117,13 +117,12 @@
             <h1 class="form-title">Add Contact</h1>
         </header>
         <form>
-            <input id="update-first-name" type="text" placeholder="First Name" required>
-            <input id="update-last-name" type="text" placeholder="Last Name" required>
-            <input type="tel" id="add-phone" placeholder="Phone Number" required>
-            <span id="phone-error" style="color: red; display: none;"></span>
+            <input type="text" id="add-first-name" placeholder="First Name" required>
+            <input type="text" id="add-last-name" placeholder="Last Name" required>
+            <input type="tel" id="add-phone" placeholder="(123) 456 - 7890" maxlength="16" />
             <input type="email" id="add-email" placeholder="Email" required>
             <span id="email-error" style="color: red; display: none;"></span>
-            <button type="submit">Save Contact</button>
+            <button id="add-contact-button" type="button">Save Contact</button>
         </form>
         <!-- Back Button -->
         <a href="main.html">

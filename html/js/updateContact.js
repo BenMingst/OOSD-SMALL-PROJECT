@@ -1,6 +1,52 @@
 const urlBase = 'http://cop4331-team26.xyz/LAMPAPI/';
 const extension = '.php';
 
+function validatePhoneNumber(phone) {
+    const phoneRegex = /^\(\d{3}\) \d{3} - \d{4}$/; // Example format: 123-456-7890
+    return phoneRegex.test(phone);
+}
+
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email format
+    return emailRegex.test(email);
+}
+
+window.addEventListener('load', () => {
+    const phoneInput = document.querySelector('#update-phone');
+    phoneInput.addEventListener('keydown', disallowNonNumericInput);
+    phoneInput.addEventListener('keyup', formatToPhone);
+  });
+  
+const disallowNonNumericInput = (evt) => {
+    if (evt.ctrlKey) { return; }
+    if (evt.key.length > 1) { return; }
+    if (/[0-9.]/.test(evt.key)) { return; }
+    evt.preventDefault();
+}
+  
+const formatToPhone = (evt) => {
+    const digits = evt.target.value.replace(/\D/g,'').substring(0,10);
+    const areaCode = digits.substring(0,3);
+    const prefix = digits.substring(3,6);
+    const suffix = digits.substring(6,10);
+  
+    if(digits.length > 6) {evt.target.value = `(${areaCode}) ${prefix} - ${suffix}`;}
+    else if(digits.length > 3) {evt.target.value = `(${areaCode}) ${prefix}`;}
+    else if(digits.length > 0) {evt.target.value = `(${areaCode}`;}
+};
+
+document.getElementById('update-email').addEventListener('input', function () {
+    const emailInput = this.value;
+    const emailError = document.getElementById('email-error');
+
+    if (!validateEmail(emailInput)) {
+        emailError.textContent = 'Invalid email format.';
+        emailError.style.display = 'block';
+    } else {
+        emailError.style.display = 'none';
+    }
+});
+
 document.getElementById('update-contact-button').addEventListener('click', () => {
     const data = {
         firstName: document.getElementById('update-first-name').value,
@@ -11,6 +57,11 @@ document.getElementById('update-contact-button').addEventListener('click', () =>
         phone: localStorage.getItem('tempPhone')
     };
 
+    //make sure phone number is valid before saving
+    if (!validatePhoneNumber(data.phoneNew)) {
+        alert('Invalid phone number format. Use (123) 456 - 7890.');
+        return;
+    }
 
     makeRequest('UpdateContact', data, (response) => {
         alert(response.error ? response.error : 'Contact updated successfully.');

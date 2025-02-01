@@ -2,7 +2,7 @@ const urlBase = 'http://cop4331-team26.xyz/LAMPAPI/';
 const extension = '.php';
 
 function validatePhoneNumber(phone) {
-    const phoneRegex = /^\d{3}-\d{3}-\d{4}$/; // Example format: 123-456-7890
+    const phoneRegex = /^\(\d{3}\) \d{3} - \d{4}$/; // Example format: 123-456-7890
     return phoneRegex.test(phone);
 }
 
@@ -74,16 +74,24 @@ document.getElementById('add-email').addEventListener('input', function () {
 
 document.getElementById('add-contact-button').addEventListener('click', () => {
     const data = {
-        firstName: document.getElementById('add-first-name').value,
-        lastName: document.getElementById('add-last-name').value,
-        phone: document.getElementById('add-phone').value,
-        email: document.getElementById('add-email').value,
-        userId: localStorage.getItem('userId'),
+            firstName: document.getElementById('add-first-name').value,
+            lastName: document.getElementById('add-last-name').value,
+            phone: document.getElementById('add-phone').value,
+            email: document.getElementById('add-email').value,
+            userId: localStorage.getItem('userId'),
     };
 
+    //make sure phone number is valid before saving
+    if (!validatePhoneNumber(data.phone)) {
+        alert('Invalid phone number format. Use (123) 456 - 7890.');
+        return;
+    } 
+     
     makeRequest('AddContact', data, (response) => {
-        alert(response.error ? response.error : 'Contact added successfully.');
+    alert(response.error ? response.error : 'Contact added successfully.');
     });
+    
+    
 });
 
 function makeRequest(endpoint, payload, callback) {

@@ -69,7 +69,7 @@ function displayResults(results) {
         contactRow.classList.add('contact-row');
         const contactInfo = document.createElement('div');
         contactInfo.classList.add('contact-info');
-        contactInfo.innerHTML = `${result.FirstName}<br>${result.Phone}<br>${result.Email}`;
+        contactInfo.innerHTML = `${result.FirstName} ${result.LastName}<br>${result.Phone}<br>${result.Email}`;
         contactRow.appendChild(contactInfo);
 
         const actionButtons = document.createElement('div');

@@ -96,7 +96,7 @@ document.getElementById('add-contact-button').addEventListener('click', () => {
         let duplicateFound = false;
         if (!response.error && response.results && response.results.length > 0) {
             for (let contact of response.results) {
-                if (contact.Phone == phone) {
+                if (contact.Phone == data.phone) {
                     duplicateFound = true;
                     break;
                 }

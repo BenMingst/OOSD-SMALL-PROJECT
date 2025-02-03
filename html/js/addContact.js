@@ -88,8 +88,8 @@ document.getElementById('add-contact-button').addEventListener('click', () => {
     } 
 
     const searchData = {
-        search: phone,
-        userId: userId
+        search: data.phone,
+        userId: data.userId
     };
 
     let duplicateFound = false;

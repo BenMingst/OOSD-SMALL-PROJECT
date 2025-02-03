@@ -92,24 +92,26 @@ document.getElementById('add-contact-button').addEventListener('click', () => {
         userId: data.userId
     };
 
-    let duplicateFound = false;
-    if (!response.error && response.results && response.results.length > 0) {
-        for (let contact of response.results) {
-            if (contact.Phone == phone) {
-                duplicateFound = true;
-                break;
+    makeRequest('SearchContacts', searchData, (response) => {
+        let duplicateFound = false;
+        if (!response.error && response.results && response.results.length > 0) {
+            for (let contact of response.results) {
+                if (contact.Phone == phone) {
+                    duplicateFound = true;
+                    break;
+                }
             }
         }
-    }
 
-    if (duplicateFound) {
-        alert("A contact with this phone number already exists. Please use a different phone number.");
-    }
-    else {
-        makeRequest('AddContact', data, (response) => {
-            alert(response.error ? response.error : 'Contact added successfully.');
-        });
-    }
+        if (duplicateFound) {
+            alert("A contact with this phone number already exists. Please use a different phone number.");
+        }
+        else {
+            makeRequest('AddContact', data, (response) => {
+                alert(response.error ? response.error : 'Contact added successfully.');
+            });
+        }
+    });
 });
 
 function makeRequest(endpoint, payload, callback) {

@@ -105,6 +105,7 @@ function displayResults(results) {
 
             makeRequest('DeleteContact', data, (response) => {
                 alert(response.error ? response.error : 'Contact deleted successfully.');
+                resultsBody.removeChild(row);
             });
         });
 

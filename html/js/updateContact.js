@@ -105,8 +105,30 @@ document.getElementById('update-contact-button').addEventListener('click', () =>
         return;
     }
 
-    makeRequest('UpdateContact', data, (response) => {
-        alert(response.error ? response.error : 'Contact updated successfully.');
+    const searchData = {
+        search: data.phoneNew,
+        userId: data.userId
+    };
+
+    makeRequest('SearchContacts', searchData, (response) => {
+        let duplicateFound = false;
+        if (!response.error && response.results && response.results.length > 0) {
+            for (let contact of response.results) {
+                if (contact.Phone == data.phoneNew) {
+                    duplicateFound = true;
+                    break;
+                }
+            }
+        }
+
+        if (duplicateFound) {
+            alert("A contact with this phone number already exists. Please use a different phone number.");
+        }
+        else {
+            makeRequest('UpdateContact', data, (response) => {
+                alert(response.error ? response.error : 'Contact updated successfully.');
+            });
+        }
     });
 });
 

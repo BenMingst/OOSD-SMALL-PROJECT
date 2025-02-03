@@ -86,12 +86,30 @@ document.getElementById('add-contact-button').addEventListener('click', () => {
         alert('Invalid phone number format. Use (123) 456 - 7890.');
         return;
     } 
-     
-    makeRequest('AddContact', data, (response) => {
-    alert(response.error ? response.error : 'Contact added successfully.');
-    });
-    
-    
+
+    const searchData = {
+        search: phone,
+        userId: userId
+    };
+
+    let duplicateFound = false;
+    if (!response.error && response.results && response.results.length > 0) {
+        for (let contact of response.results) {
+            if (contact.Phone == phone) {
+                duplicateFound = true;
+                break;
+            }
+        }
+    }
+
+    if (duplicateFound) {
+        alert("A contact with this phone number already exists. Please use a different phone number.");
+    }
+    else {
+        makeRequest('AddContact', data, (response) => {
+            alert(response.error ? response.error : 'Contact added successfully.');
+        });
+    }
 });
 
 function makeRequest(endpoint, payload, callback) {

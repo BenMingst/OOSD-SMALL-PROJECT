@@ -35,6 +35,48 @@ const formatToPhone = (evt) => {
     else if(digits.length > 0) {evt.target.value = `(${areaCode}`;}
 };
 
+document.addEventListener('DOMContentLoaded', () => {
+    const userId = localStorage.getItem('userId');
+    const phone = localStorage.getItem('tempPhone'); 
+
+    if (!phone) {
+        console.warn("No contact phone number found in localStorage. Cannot pre-fill form.");
+        return;
+    }
+
+    const searchData = {
+        search: phone,
+        userId: userId
+    };
+
+    makeRequest('SearchContacts', searchData, (response) => {
+        if (response.error && response.error !== "No Records Found") {
+            console.error("Error searching contacts: " + response.error);
+            return;
+        }
+
+        let foundContact = null;
+        if (!response.error && response.results && response.results.length > 0) {
+            for (let contact of response.results) {
+                if (contact.Phone === phone) {
+                    foundContact = contact;
+                    break;
+                }
+            }
+        }
+
+        if (foundContact) {
+            document.getElementById('update-first-name').value = foundContact.FirstName;
+            document.getElementById('update-last-name').value = foundContact.LastName;
+            document.getElementById('update-phone').value = foundContact.Phone;
+            document.getElementById('update-email').value = foundContact.Email;
+        } else {
+            console.warn("Contact not found for phone: " + phone);
+        }
+    });
+});
+
+
 document.getElementById('update-email').addEventListener('input', function () {
     const emailInput = this.value;
     const emailError = document.getElementById('email-error');

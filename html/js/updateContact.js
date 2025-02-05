@@ -114,7 +114,7 @@ document.getElementById('update-contact-button').addEventListener('click', () =>
         let duplicateFound = false;
         if (!response.error && response.results && response.results.length > 0) {
             for (let contact of response.results) {
-                if (contact.Phone == data.phoneNew) {
+                if (contact.Phone == data.phoneNew && contact.Phone != data.phone) {
                     duplicateFound = true;
                     break;
                 }

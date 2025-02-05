@@ -110,11 +110,12 @@ document.getElementById('update-contact-button').addEventListener('click', () =>
         userId: data.userId
     };
 
+    let duplicateFound = false;
+
     makeRequest('SearchContacts', searchData, (response) => {
-        let duplicateFound = false;
         if (!response.error && response.results && response.results.length > 0) {
             for (let contact of response.results) {
-                if (contact.Phone == data.phoneNew && contact.Phone != data.phone) {
+                if (contact.Phone == data.phoneNew && data.phoneNew != data.phone) {
                     duplicateFound = true;
                     break;
                 }

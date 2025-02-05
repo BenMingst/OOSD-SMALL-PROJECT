@@ -22,6 +22,19 @@ document.getElementById('search-contact-button').addEventListener('click', () =>
 // setInterval(createFish, 1000);
 
 
+// Function to show the toast
+function showToast(message) {
+    var toast = document.getElementById("toast");
+    toast.className = "toast"; // Add the "show" class to the toast
+    toast.innerHTML = message; // Set the message
+    toast.style.visibility = "visible"; // Make it visible
+  
+    // Hide the toast after 3 seconds
+    setTimeout(function() {
+      toast.style.visibility = "hidden"; // Hide the toast
+    }, 3000);
+  }
+
 function makeRequest(endpoint, payload, callback) {
     const url = urlBase + endpoint + extension;
     const xhr = new XMLHttpRequest();
@@ -104,7 +117,8 @@ function displayResults(results) {
             };
 
             makeRequest('DeleteContact', data, (response) => {
-                alert(response.error ? response.error : 'Contact deleted successfully.');
+                //alert(response.error ? response.error : 'Contact deleted successfully.');
+                showToast("Contact deleted seccessfully");
                 resultsBody.removeChild(row);
             });
         });

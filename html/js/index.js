@@ -82,6 +82,8 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
     makeRequest('Login', data, (response) => {
         if (response.error)
         {
+		errorMessage.textContent = "Wrong username or password. Please try again.";
+		errorMessage.style.display = "block";
         }
         else
         {

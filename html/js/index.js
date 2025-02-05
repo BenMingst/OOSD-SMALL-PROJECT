@@ -83,13 +83,10 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
     makeRequest('Login', data, (response) => {
         if (response.error)
         {
-<<<<<<< HEAD
+
 		errorMessage.textContent = "Wrong username or password. Please try again.";
 		errorMessage.style.display = "block";
-=======
-            errorMessage.textContent = "Wrong username or password. Please try again.";
-            errorMessage.style.display = "block";
->>>>>>> 78a946f9a573717eed3e99da8f65e761af28c269
+
         }
         else
         {

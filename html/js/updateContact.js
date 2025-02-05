@@ -89,6 +89,18 @@ document.getElementById('update-email').addEventListener('input', function () {
     }
 });
 
+document.getElementById('update-phone').addEventListener('input', function () {
+    const phoneInput = this.value;
+    const phoneError = document.getElementById('phone-error');
+
+    if (!validatePhoneNumber(phoneInput)) {
+        phoneError.textContent = 'Invalid phone format.';
+        phoneError.style.display = 'block';
+    } else {
+        phoneError.style.display = 'none';
+    }
+});
+
 document.getElementById('update-contact-button').addEventListener('click', () => {
     const data = {
         firstName: document.getElementById('update-first-name').value,

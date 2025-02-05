@@ -47,6 +47,18 @@ document.getElementById('add-email').addEventListener('input', function () {
     }
 });
 
+document.getElementById('add-phone').addEventListener('input', function () {
+    const phoneInput = this.value;
+    const phoneError = document.getElementById('phone-error');
+
+    if (!validatePhoneNumber(phoneInput)) {
+        phoneError.textContent = 'Invalid phone format.';
+        phoneError.style.display = 'block';
+    } else {
+        phoneError.style.display = 'none';
+    }
+});
+
 // setInterval(createFish, 1000);
 
 
@@ -80,12 +92,6 @@ document.getElementById('add-contact-button').addEventListener('click', () => {
             email: document.getElementById('add-email').value,
             userId: localStorage.getItem('userId'),
     };
-
-    //make sure phone number is valid before saving
-    if (!validatePhoneNumber(data.phone)) {
-        alert('Invalid phone number format. Use (123) 456 - 7890.');
-        return;
-    } 
 
     const searchData = {
         search: data.phone,

@@ -93,6 +93,9 @@ document.getElementById('add-contact-button').addEventListener('click', () => {
             userId: localStorage.getItem('userId'),
     };
 
+    if (!validatePhoneNumber(data.phone) || !validateEmail(data.email))
+        return;
+
     const searchData = {
         search: data.phone,
         userId: data.userId

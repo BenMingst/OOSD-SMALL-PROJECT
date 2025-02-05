@@ -112,10 +112,9 @@ document.getElementById('update-contact-button').addEventListener('click', () =>
     };
 
     //make sure phone number is valid before saving
-    if (!validatePhoneNumber(data.phoneNew)) {
-        alert('Invalid phone number format. Use (123) 456 - 7890.');
+    if (!validatePhoneNumber(data.phone) || !validateEmail(data.email))
         return;
-    }
+
 
     const searchData = {
         search: data.phoneNew,

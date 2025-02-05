@@ -1,31 +1,6 @@
 const urlBase = 'http://cop4331-team26.xyz/LAMPAPI/';
 const extension = '.php';
 
-document.getElementById('add-contact-button').addEventListener('click', () => {
-    const data = {
-        firstName: document.getElementById('add-first-name').value,
-        lastName: document.getElementById('add-last-name').value,
-        phone: document.getElementById('add-phone').value,
-        email: document.getElementById('add-email').value,
-        userId: localStorage.getItem('userId'),
-    };
-
-    makeRequest('AddContact', data, (response) => {
-        alert(response.error ? response.error : 'Contact added successfully.');
-    });
-});
-
-document.getElementById('delete-contact-button').addEventListener('click', () => {
-    const data = {
-        phone: document.getElementById('delete-phone').value,
-        userId: localStorage.getItem('userId'),
-    };
-
-    makeRequest('DeleteContact', data, (response) => {
-        alert(response.error ? response.error : 'Contact deleted successfully.');
-    });
-});
-
 document.getElementById('search-contact-button').addEventListener('click', () => {
     const data = {
         search: document.getElementById('search-query').value,
@@ -33,37 +8,19 @@ document.getElementById('search-contact-button').addEventListener('click', () =>
     };
 
     makeRequest('SearchContacts', data, (response) => {
-        const resultsContainer = document.getElementById('search-results');
-        resultsContainer.innerHTML = ''; 
-
         if (response.error)
         {
             alert(response.error);
         }
         else
         {
-            response.results.forEach((contact) => {
-                const div = document.createElement('div');
-                div.textContent = `${contact.FirstName} ${contact.LastName} - ${contact.Phone} - ${contact.Email}`;
-                resultsContainer.appendChild(div);
-            });
+            displayResults(response.results);
         }
     });
 });
 
-document.getElementById('update-contact-button').addEventListener('click', () => {
-    const data = {
-        firstName: document.getElementById('update-first-name').value,
-        lastName: document.getElementById('update-last-name').value,
-        phone: document.getElementById('update-phone').value,
-        email: document.getElementById('update-email').value,
-        userId: localStorage.getItem('userId'),
-    };
+// setInterval(createFish, 1000);
 
-    makeRequest('UpdateContact', data, (response) => {
-        alert(response.error ? response.error : 'Contact updated successfully.');
-    });
-});
 
 function makeRequest(endpoint, payload, callback) {
     const url = urlBase + endpoint + extension;
@@ -81,3 +38,86 @@ function makeRequest(endpoint, payload, callback) {
 
     xhr.send(JSON.stringify(payload));
 }
+
+// function createFish() {
+//     const fish = document.createElement('img');
+//     fish.src = 'https://i.ibb.co/7rL6Nnq/fish.png';
+//     fish.className = 'fish';
+
+//     const topPosition = Math.random() * window.innerHeight;
+//     fish.style.top = `${topPosition}px`;
+
+//     const zIndex = Math.random() < 0.5 ? 2 : 5;
+//     fish.style.zIndex = zIndex;
+
+//     const duration = Math.random() * 5 + 5;
+//     fish.style.animationDuration = `${duration}s`;
+
+//     container.appendChild(fish);
+
+//     fish.addEventListener('animationend', () => {
+//         fish.remove();
+//     });
+// }
+
+function displayResults(results) {
+    const resultsBody = document.getElementById('results-body');
+    resultsBody.innerHTML = '';
+    results.forEach(result => {
+        const row = document.createElement('tr');
+        const contactRow = document.createElement('td');
+        contactRow.classList.add('contact-row');
+        const contactInfo = document.createElement('div');
+        contactInfo.classList.add('contact-info');
+        contactInfo.innerHTML = `${result.FirstName} ${result.LastName}<br>${result.Phone}<br>${result.Email}`;
+        contactRow.appendChild(contactInfo);
+
+        const actionButtons = document.createElement('div');
+        actionButtons.classList.add('action-buttons');
+
+        const editButton = document.createElement('a');
+        editButton.href = "update-contact.html";
+        const editIcon = document.createElement('img');
+        editIcon.src = "https://i.ibb.co/0y53H7VG/edit.png";
+        editIcon.alt = "Edit";
+        editIcon.classList.add('icon-btn-small');
+        editButton.appendChild(editIcon);
+        editIcon.addEventListener('click', () => {
+            localStorage.setItem("tempPhone", result.Phone);
+        });
+
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-btn');
+        deleteButton.id = "delete-contact-button";
+        const deleteIcon = document.createElement('img');
+        deleteIcon.src = "https://i.ibb.co/nqnjzJqz/delete.png";
+        deleteIcon.alt = "Delete";
+        deleteIcon.classList.add('icon-btn-small');
+        deleteButton.appendChild(deleteIcon);
+        deleteActive = true; 
+        deleteButton.addEventListener('click', () => {
+            phoneDelete = result.Phone;
+
+            const data = {
+                phone: phoneDelete,
+                userId: localStorage.getItem('userId'),
+            };
+
+            makeRequest('DeleteContact', data, (response) => {
+                alert(response.error ? response.error : 'Contact deleted successfully.');
+                resultsBody.removeChild(row);
+            });
+        });
+
+        actionButtons.appendChild(editButton);
+        actionButtons.appendChild(deleteButton);
+        contactRow.appendChild(actionButtons);
+
+        row.appendChild(contactRow);
+        resultsBody.appendChild(row);
+    });
+
+    document.querySelector('.results-table').classList.remove('hidden');
+}
+
+

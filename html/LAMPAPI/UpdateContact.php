@@ -4,7 +4,8 @@
     $userId    = $inData["userId"];
     $firstName = $inData["firstName"];
     $lastName  = $inData["lastName"];
-    $phone     = $inData["phone"];
+    $phone = $inData["phone"];
+    $phoneNew     = $inData["phoneNew"];
     $email     = $inData["email"];
     
     $conn = new mysqli("localhost", "DataGrant", "DatabaseCop4331", "COP4331");
@@ -14,8 +15,8 @@
     }
     else
     {
-        $stmt = $conn->prepare("UPDATE Contacts SET FirstName = ?, LastName = ?, Phone = ?, Email = ? (WHERE Phone = ?) AND UserID = ?");
-        $stmt->bind_param("ssssi", $firstName, $lastName, $phone, $email, $userId);
+        $stmt = $conn->prepare("UPDATE Contacts SET FirstName = ?, LastName = ?, Email = ?, Phone = ? WHERE Phone = ? AND UserID = ?");
+        $stmt->bind_param("sssssi", $firstName, $lastName, $email, $phoneNew, $phone, $userId);
         $stmt->execute();
         
         if($stmt->affected_rows > 0)

@@ -14,11 +14,10 @@
             padding: 0;
             overflow-y: auto;
             overflow-x: auto;
-
         }
 
         .background, .rock-layer-behind, .light, .rock-layer-front {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -26,6 +25,7 @@
             background-size: cover;
             background-position: center;
         }
+
 
         .background {
             background-image: url('https://i.ibb.co/0Zfw77j/background.png');
@@ -65,6 +65,16 @@
             padding: 10px;
             font-size: 1.5rem;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logout-btn img {
+            width: 170px;
+            height: 170px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
         }
 
         .search-container {
@@ -80,29 +90,56 @@
             font-size: 1rem;
         }
 
-        .search-btn, .contact-btn {
-            padding: 10px 15px;
+        .search-btn {
+            width: 75px;
+            height: 60px;
+            background-color: #273f77;
             border: none;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 1rem;
-            text-decoration: none;
-            text-align: center;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
         }
 
-        .search-btn {
+            .search-btn img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .search-btn:hover {
+                background-color: #1a2c57;
+                transform: scale(1.05);
+            }
+
+
+        .contact-btn {
             background-color: #273f77;
         }
 
-        .contact-btn {
-            background-color: #4caf50;
+        .icon-btn {
+            width: 75px;
+            height: 60px;
+            background-color: #273f77;
+            border: none;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
         }
+
+            .icon-btn img {
+                width: 55px;
+                height: 55px;
+            }
+
+            .icon-btn:hover {
+                background-color: #1a2c57;
+                transform: scale(1.05);
+            }
 
         .results-table {
             width: 100%;
@@ -112,15 +149,15 @@
             text-align: left;
         }
 
-        .results-table th, .results-table td {
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
+            .results-table th, .results-table td {
+                padding: 10px;
+                border: 1px solid #ccc;
+            }
 
-        .results-table th {
-            background-color: #273f77;
-            color: white;
-        }
+            .results-table th {
+                background-color: #273f77;
+                color: white;
+            }
 
         .hidden {
             display: none;
@@ -137,16 +174,6 @@
             width: 65px;
         }
 
-        .edit-btn {
-            background-color: #273f77;
-            color: white;
-        }
-
-        .delete-btn {
-            background-color: #ff4d4d;
-            color: white;
-        }
-
         .contact-row {
             display: flex;
             justify-content: space-between;
@@ -161,6 +188,24 @@
             display: flex;
             gap: 5px;
         }
+
+        .icon-btn-small {
+            width: 70px;
+            height: 70px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+            .icon-btn-small:hover {
+                transform: scale(1.1);
+            }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -172,12 +217,20 @@
     <div class="form-container">
         <header class="form-header">
             <h1 class="form-title">WaveLink</h1>
+            <a href="index.html" class="logout-btn">
+                <img src="https://i.ibb.co/h1YTzFNX/log-out.png" alt="Logout">
+            </a>
         </header>
+
         <form id="search-form">
             <div class="search-container">
                 <input type="text" id="search-query" class="search-input" placeholder="Search" required>
-                <button type="submit" class="search-btn">🔍</button>
-                <a href="add-contact.html" class="contact-btn">+</a>
+                <button type="button" id="search-contact-button" class="search-btn">
+                    <img src="https://i.ibb.co/Rp90Jm1W/search.png" alt="Search">
+                </button>
+                <a href="add-contact.html" class="icon-btn contact-btn">
+                    <img src="https://i.ibb.co/2YcX8qxP/add.png" alt="Add Contact">
+                </a>
             </div>
         </form>
 
@@ -185,54 +238,8 @@
             <tbody id="results-body"></tbody>
         </table>
     </div>
-
-    <script>
-        document.getElementById('search-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const query = document.getElementById('search-query').value.trim();
-            if (query) {
-                displayResults([ 
-                    { name: 'John Doe', phone: '123-456-7890', email: 'john.doe@example.com' },
-                    { name: 'Jane Smith', phone: '987-654-3210', email: 'jane.smith@example.com' },
-                    { name: 'Alex Johnson', phone: '555-123-4567', email: 'alex.johnson@example.com' }
-                ]);
-                document.getElementById('search-query').value = '';
-            }
-        });
-
-        function displayResults(results) {
-            const resultsBody = document.getElementById('results-body');
-            resultsBody.innerHTML = '';
-            results.forEach(result => {
-                const row = document.createElement('tr');
-                const contactRow = document.createElement('td');
-                contactRow.classList.add('contact-row');
-
-                // Contact information
-                const contactInfo = document.createElement('div');
-                contactInfo.classList.add('contact-info');
-                contactInfo.innerHTML = `${result.name}<br>${result.phone}<br>${result.email}`;
-                contactRow.appendChild(contactInfo);
-
-                // Action buttons (Edit and Delete)
-                const actionButtons = document.createElement('div');
-                actionButtons.classList.add('action-buttons');
-                actionButtons.innerHTML = `
-                    <a href="update-contact.html"><button class="action-btn edit-btn">Edit</button></a>
-                    <button class="action-btn delete-btn" onclick="deleteContact(event)">Delete</button>
-                `;
-                contactRow.appendChild(actionButtons);
-
-                row.appendChild(contactRow);
-                resultsBody.appendChild(row);
-            });
-            document.querySelector('.results-table').classList.remove('hidden');
-        }
-
-        function deleteContact(event) {
-            const row = event.target.closest('tr');
-            row.remove();
-        }
-    </script>
 </body>
 </html>
+
+<script src="js/main.js"></script>
+

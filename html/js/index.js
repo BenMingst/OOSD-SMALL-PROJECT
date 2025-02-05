@@ -9,6 +9,7 @@ const loginBttn = document.getElementById('login-button');
 const signupBttn = document.getElementById('signup-button');
 const loginUserInput = document.getElementById('login-username');
 const loginPassInput = document.getElementById('login-password');
+const errorMessage = document.getElementById('error-message');
 
 setInterval(createFish, 1000);
 

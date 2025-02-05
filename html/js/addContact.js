@@ -109,7 +109,7 @@ document.getElementById('add-contact-button').addEventListener('click', () => {
         else {
             makeRequest('AddContact', data, (response) => {
                 alert(response.error ? response.error : 'Contact added successfully.');
-                window.location.href = 'main.html';
+                // window.location.href = 'main.html'; 
             });
         }
     });

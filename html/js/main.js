@@ -18,7 +18,7 @@ function performSearch() {
 
     makeRequest('SearchContacts', data, (response) => {
         if (response.error) {
-            alert(response.error);
+            showToast("No records found. Please add a contact");
         } else {
             displayResults(response.results);
         }
@@ -30,16 +30,22 @@ function performSearch() {
 
 // Function to show the toast
 function showToast(message) {
-    var toast = document.getElementById("toast");
-    toast.className = "toast"; // Add the "show" class to the toast
-    toast.innerHTML = message; // Set the message
-    toast.style.visibility = "visible"; // Make it visible
-  
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toast-message');
+
+    // Set the message
+    toastMessage.textContent = message;
+
+    // Show the toast
+    toast.style.display = 'block';
+    toast.classList.add('show');
+
     // Hide the toast after 3 seconds
-    setTimeout(function() {
-      toast.style.visibility = "hidden"; // Hide the toast
+    setTimeout(() => {
+        toast.classList.remove('show');
+        toast.style.display = 'none';
     }, 3000);
-  }
+}
 
 function makeRequest(endpoint, payload, callback) {
     const url = urlBase + endpoint + extension;

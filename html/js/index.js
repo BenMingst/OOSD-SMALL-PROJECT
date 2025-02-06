@@ -70,6 +70,25 @@ function makeRequest(endpoint, payload, callback) {
     xhr.send(jsonPayload);
 }
 
+// Function to show the toast
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toast-message');
+
+    // Set the message
+    toastMessage.textContent = message;
+
+    // Show the toast
+    toast.style.display = 'block';
+    toast.classList.add('show');
+
+    // Hide the toast after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        toast.style.display = 'none';
+    }, 3000);
+}
+
 // login api
 document.getElementById('login-form').addEventListener('submit', (e) => {
     e.preventDefault();
@@ -115,7 +134,7 @@ document.getElementById('signup-form').addEventListener('submit', (e) => {
     makeRequest('Signup', data, (response) => {
         if (response.error)
         {
-            alert(response.error);
+            showToast("Signup Unseccessful");
         }
         else
         {
@@ -124,7 +143,7 @@ document.getElementById('signup-form').addEventListener('submit', (e) => {
             localStorage.setItem('firstName', firstName);
             localStorage.setItem('lastName', lastName);
             
-            alert("Signup successful! You are now logged in.");
+            showToast("Signup successful! You are now logged in.");
             window.location.href = 'main.html';
         }
     });

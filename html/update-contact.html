@@ -109,9 +109,31 @@
       .back-button:hover {
         background: #1b2c5c;
       }
+
+      .toast {
+        position: fixed;
+        top: 20px;
+        left: 50%; 
+        transform: translateX(-50%); 
+        background-color: #333; 
+        color: #fff; 
+        padding: 15px; 
+        border-radius: 5px; 
+        z-index: 1000; 
+        transition: opacity 0.5s ease-in-out; 
+        opacity: 0; 
+      }
+
+      .toast.show {
+        opacity: 1;
+      }
+      
     </style>
   </head>
   <body>
+    <div id="toast" class="toast" style="display: none;">
+      <span id="toast-message">Default message</span>
+    </div>
     <div class="background"></div>
     <div class="rock-layer-behind"></div>
     <div class="light"></div>

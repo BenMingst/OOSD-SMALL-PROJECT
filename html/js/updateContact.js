@@ -11,6 +11,25 @@ function validateEmail(email) {
     return emailRegex.test(email);
 }
 
+// Function to show the toast
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toast-message');
+
+    // Set the message
+    toastMessage.textContent = message;
+
+    // Show the toast
+    toast.style.display = 'block';
+    toast.classList.add('show');
+
+    // Hide the toast after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        toast.style.display = 'none';
+    }, 3000);
+}
+
 window.addEventListener('load', () => {
     const phoneInput = document.querySelector('#update-phone');
     phoneInput.addEventListener('keydown', disallowNonNumericInput);
@@ -76,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
 document.getElementById('update-email').addEventListener('input', function () {
     const emailInput = this.value;
     const emailError = document.getElementById('email-error');
@@ -134,11 +152,11 @@ document.getElementById('update-contact-button').addEventListener('click', () =>
         }
 
         if (duplicateFound) {
-            alert("A contact with this phone number already exists. Please use a different phone number.");
+            showToast("A contact with this phone number already exists. Please use a different phone number.");
         }
         else {
             makeRequest('UpdateContact', data, (response) => {
-                alert(response.error ? response.error : 'Contact updated successfully.');
+                showToast(response.error ? response.error : 'Contact updated successfully.');
             });
         }
     });

@@ -83,6 +83,24 @@ document.getElementById('add-phone').addEventListener('input', function () {
 //         fish.remove();
 //     });
 // }
+// Function to show the toast
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toast-message');
+
+    // Set the message
+    toastMessage.textContent = message;
+
+    // Show the toast
+    toast.style.display = 'block';
+    toast.classList.add('show');
+
+    // Hide the toast after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        toast.style.display = 'none';
+    }, 3000);
+}
 
 document.getElementById('add-contact-button').addEventListener('click', () => {
     const data = {
@@ -113,7 +131,7 @@ document.getElementById('add-contact-button').addEventListener('click', () => {
         }
 
         if (duplicateFound) {
-            alert("A contact with this phone number already exists. Please use a different phone number.");
+            showToast("A contact with this phone number already exists. Please use a different phone number.");
         }
         else {
             makeRequest('AddContact', data, (response) => {

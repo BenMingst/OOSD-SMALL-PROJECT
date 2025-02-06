@@ -27,6 +27,15 @@
                 transform: translateX(110vw); 
             }
         }
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
     </style>
 </head>
 <body>
@@ -187,6 +196,11 @@
     </style>
     </head>
     <body>
+        <img src="https://i.ibb.co/0Zfw77j/background.png" alt="Ocean background" class="visually-hidden">
+        <img src="https://i.ibb.co/ZNQP3zr/rock-back.png" alt="Rock layer behind" class="visually-hidden">
+        <img src="https://i.ibb.co/n0CDD0Z/light.png" alt="Light beams" class="visually-hidden">
+        <img src="https://i.ibb.co/Chsm5Gw/roxk-front.png" alt="Rock layer front" class="visually-hidden">
+
         <div id="toast" class="toast" style="display: none;">
             <span id="toast-message">Default message</span>
         </div>

@@ -1,23 +1,29 @@
 const urlBase = 'http://cop4331-team26.xyz/LAMPAPI/';
 const extension = '.php';
 
-document.getElementById('search-contact-button').addEventListener('click', () => {
+document.getElementById('search-contact-button').addEventListener('click', performSearch);
+
+document.getElementById('search-query').addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Prevents form submission if inside a form
+        performSearch();
+    }
+});
+
+function performSearch() {
     const data = {
         search: document.getElementById('search-query').value,
         userId: localStorage.getItem('userId'),
     };
 
     makeRequest('SearchContacts', data, (response) => {
-        if (response.error)
-        {
+        if (response.error) {
             alert(response.error);
-        }
-        else
-        {
+        } else {
             displayResults(response.results);
         }
     });
-});
+}
 
 // setInterval(createFish, 1000);
 

@@ -96,7 +96,7 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
     // 
     const data = {
         login: document.getElementById('login-username').value,
-        password: document.getElementById('login-password').value,
+        password: document.getElementById('password').value,
     };
 
     makeRequest('Login', data, (response) => {
@@ -147,4 +147,19 @@ document.getElementById('signup-form').addEventListener('submit', (e) => {
             window.location.href = 'main.html';
         }
     });
+
 });
+
+document.getElementById('togglePassword').addEventListener('click', function () {
+    const passwordInput = document.getElementById('password');
+    const toggleButton = this;
+
+    // Toggle the type attribute
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+
+    // Toggle the icon
+    toggleButton.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+});
+
+

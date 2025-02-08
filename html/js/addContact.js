@@ -40,7 +40,7 @@ document.getElementById('add-email').addEventListener('input', function () {
     const emailError = document.getElementById('email-error');
 
     if (!validateEmail(emailInput)) {
-        emailError.textContent = 'Invalid email format.';
+        emailError.textContent = '*Invalid email format.';
         emailError.style.display = 'block';
     } else {
         emailError.style.display = 'none';
@@ -52,7 +52,7 @@ document.getElementById('add-phone').addEventListener('input', function () {
     const phoneError = document.getElementById('phone-error');
 
     if (!validatePhoneNumber(phoneInput)) {
-        phoneError.textContent = 'Invalid phone format.';
+        phoneError.textContent = '*Invalid phone number format.';
         phoneError.style.display = 'block';
     } else {
         phoneError.style.display = 'none';

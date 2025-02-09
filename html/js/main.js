@@ -24,6 +24,7 @@ function performSearch() {
         }
     });
 }
+const container = document.querySelector('.container');
 
 setInterval(createFish, 1000);
 

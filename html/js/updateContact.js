@@ -162,6 +162,9 @@ document.getElementById('update-contact-button').addEventListener('click', () =>
     });
 });
 
+const container = document.getElementById('container');
+
+
 function createFish() {
     const fish = document.createElement('img');
     fish.src = 'https://i.ibb.co/7rL6Nnq/fish.png';

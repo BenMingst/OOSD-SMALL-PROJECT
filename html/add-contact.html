@@ -31,6 +31,13 @@
         z-index: 1;
       }
 
+        .fish {
+            position: absolute;
+            left: -100px;
+            width: 100px;
+            animation: swim linear forwards;
+        }
+
       .rock-layer-behind {
         background-image: url("https://i.ibb.co/ZNQP3zr/rock-back.png");
         z-index: 4;
@@ -124,6 +131,8 @@
         transition: opacity 0.5s ease-in-out; 
         opacity: 0; 
       }
+
+
 
       .toast.show {
         opacity: 1;

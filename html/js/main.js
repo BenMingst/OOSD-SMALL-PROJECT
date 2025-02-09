@@ -64,27 +64,26 @@ function makeRequest(endpoint, payload, callback) {
 
     xhr.send(JSON.stringify(payload));
 }
+ function createFish() {
+      const fish = document.createElement('img');
+      fish.src = 'https://i.ibb.co/7rL6Nnq/fish.png';
+      fish.className = 'fish';
 
-//  function createFish() {
-//      const fish = document.createElement('img');
-//      fish.src = 'https://i.ibb.co/7rL6Nnq/fish.png';
-//      fish.className = 'fish';
+      const topPosition = Math.random() * window.innerHeight;
+      fish.style.top = `${topPosition}px`;
 
-//      const topPosition = Math.random() * window.innerHeight;
-//      fish.style.top = `${topPosition}px`;
+      const zIndex = Math.random() < 0.5 ? 2 : 5;
+      fish.style.zIndex = zIndex;
 
-//      const zIndex = Math.random() < 0.5 ? 2 : 5;
-//      fish.style.zIndex = zIndex;
+      const duration = Math.random() * 5 + 5;
+     fish.style.animationDuration = `${duration}s`;
 
-//      const duration = Math.random() * 5 + 5;
-//     fish.style.animationDuration = `${duration}s`;
+      container.appendChild(fish);
 
-//      container.appendChild(fish);
-
-//      fish.addEventListener('animationend', () => {
-//          fish.remove();
-//      });
-//  }
+      fish.addEventListener('animationend', () => {
+          fish.remove();
+      });
+  }
 
 function displayResults(results) {
     const resultsBody = document.getElementById('results-body');

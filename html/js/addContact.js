@@ -157,3 +157,4 @@ function makeRequest(endpoint, payload, callback) {
     };
 
     xhr.send(JSON.stringify(payload));
+}

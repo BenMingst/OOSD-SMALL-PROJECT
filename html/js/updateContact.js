@@ -186,8 +186,7 @@ function createFish() {
      });
 }
 
-SetInterval(createFish, 1000);
-
+setInterval(createFish, 1000);
 
 function makeRequest(endpoint, payload, callback) {
     const url = urlBase + endpoint + extension;

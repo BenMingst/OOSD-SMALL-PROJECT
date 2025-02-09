@@ -16,7 +16,9 @@ window.addEventListener('load', () => {
     phoneInput.addEventListener('keydown', disallowNonNumericInput);
     phoneInput.addEventListener('keyup', formatToPhone);
   });
-  
+
+const container = document.querySelector('.container');
+
 const disallowNonNumericInput = (evt) => {
     if (evt.ctrlKey) { return; }
     if (evt.key.length > 1) { return; }

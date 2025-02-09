@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lighthouse I guess?" />
     <title>WaveLink</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+NSW:wght@100..400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Playwrite AU NSW', sans-serif; /* Apply to the entire body */
@@ -35,6 +37,7 @@
             clip: rect(0, 0, 0, 0);
             white-space: nowrap;
             border: 0;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -59,6 +62,16 @@
             background-size: cover;
             background-position: center;
             z-index: 1;
+            pointer-events: none;
+        }
+
+        .conch {
+            position: absolute;
+            top: -15%;
+            left: -5%;
+            width: 900px;
+            z-index: 6;
+            cursor: pointer;
         }
 
         .rock-layer-behind {
@@ -71,6 +84,7 @@
             background-size: cover;
             background-position: center;
             z-index: 4;
+            pointer-events: none;
         }
 
         .light {
@@ -95,6 +109,7 @@
             background-size: cover;
             background-position: center;
             z-index: 6;
+            pointer-events: none;
         }
 
         .form-container {
@@ -189,9 +204,42 @@
             opacity: 0; 
       }
 
-      .toast.show {
+        .toast.show {
             opacity: 1;
-      }
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .password-group {
+            position: relative;
+        }
+
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            padding-right: 40px;
+            box-sizing: border-box;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 60%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            pointer-events: auto; 
+            display: flex; 
+            align-items: center; 
+            color: #676e75;
+        }
+        .toggle-password i {
+            line-height: 1; 
+            margin: 0; 
+            vertical-align: middle; 
+        }
       
     </style>
     </head>
@@ -200,10 +248,45 @@
         <img src="https://i.ibb.co/ZNQP3zr/rock-back.png" alt="Rock layer behind" class="visually-hidden">
         <img src="https://i.ibb.co/n0CDD0Z/light.png" alt="Light beams" class="visually-hidden">
         <img src="https://i.ibb.co/Chsm5Gw/roxk-front.png" alt="Rock layer front" class="visually-hidden">
-
+        
         <div id="toast" class="toast" style="display: none;">
             <span id="toast-message">Default message</span>
         </div>
+
+        <div class="container">
+            <img src="https://i.ibb.co/bgWpyMg7/conch.png" alt="Conch" id="conch" class="conch">
+            <audio id="audio1" src="https://archive.org/download/tvtunes_11560/Spongebob%20Squarepants.mp3"></audio>
+        </div>
+        
+        <script>
+            const conch = document.getElementById('conch');
+            const audioFiles = [
+                document.getElementById('audio1'),
+            ];
+            let currentAudioIndex = 0;
+
+            function toggleAudio() {
+                /*const currentAudio = audioFiles[currentAudioIndex];
+
+                if (currentAudio.paused) {
+                    audioFiles.forEach(audio => audio.pause());
+                    currentAudio.play();
+                } else {
+                    currentAudio.pause(); 
+                }
+
+                currentAudioIndex = (currentAudioIndex + 1) % audioFiles.length;*/
+                const audio = document.getElementById('audio1');
+                if (audio.paused) {
+                    audio.play()
+                } else {
+                    audio.pause();
+                }
+            }
+
+            conch.addEventListener('click', toggleAudio);
+        </script>
+
         <div class="background"></div>
         <div class="rock-layer-behind"></div>
         <div class="light"></div>
@@ -217,9 +300,12 @@
                 <form id="login-form">
                     <label for="login-username">Username:</label>
                     <input type="text" id="login-username" required>
-
-                    <label for="login-password">Password:</label>
-                    <input type="password" id="login-password" required>
+                    
+                    <div class="input-group password-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                        <span id="togglePassword" class="toggle-password"><i class="fas fa-eye"></i></span>
+                    </div>
 
                     <button type="submit">Login</button>
 		    <p id="error-message" style="color : red; display: none;">Wrong username or password. Please try again.</p>

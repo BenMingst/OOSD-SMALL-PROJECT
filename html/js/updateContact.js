@@ -162,7 +162,7 @@ document.getElementById('update-contact-button').addEventListener('click', () =>
     });
 });
 
-const container = document.getElementById('container');
+const container = document.querySelector('.container');
 
 
 function createFish() {

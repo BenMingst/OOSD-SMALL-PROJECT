@@ -69,6 +69,7 @@ document.getElementById('add-phone').addEventListener('input', function () {
      const fish = document.createElement('img');
      fish.src = 'https://i.ibb.co/7rL6Nnq/fish.png';
      fish.className = 'fish';
+     fish.alt = "Fish";
 
      const topPosition = Math.random() * window.innerHeight;
      fish.style.top = `${topPosition}px`;
